@@ -8,3 +8,4 @@ app/services/*.js
 app/models/*.js
 routes.js
 coverage/*
+test.coffee
