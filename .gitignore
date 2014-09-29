@@ -1,0 +1,10 @@
+.DS_Store
+.sass-cache
+config/*
+.rebooted
+node_modules/*
+app/controllers/*.js
+app/services/*.js
+app/models/*.js
+routes.js
+coverage/*

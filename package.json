@@ -1,0 +1,14 @@
+{
+  "name": "car-assistang",
+  "description": "Car-assistant",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "4.x",
+    "coffee-script": "~1.7.1",
+    "config-heroku": "^0.1.1-a"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.8"
+  }
+}
