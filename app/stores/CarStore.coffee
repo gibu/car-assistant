@@ -23,8 +23,13 @@ db = postgres.define "cars", {
 
 CarStore =
   find: (query = {}) ->
-    db.find(where: query).then (cars) ->
-      cars.values
+    db.find(where: query).then (car) ->
+      car.values
+
+  findAll: (query = {}) ->
+    db.findAll(where: query).then (cars) ->
+      cars.map (car) ->
+        car.values
 
   create: (params) ->
     db.create(params).then (car) ->

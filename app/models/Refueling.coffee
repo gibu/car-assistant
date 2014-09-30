@@ -2,8 +2,8 @@ _ = require 'lodash'
 RefuelingStore = require '../stores/RefuelingStore'
 
 Refueling =
-  find: (query) ->
-    RefuelingStore.find(query)
+  findAll: (query) ->
+    RefuelingStore.findAll(query)
 
   create: (params) ->
     unless params.item_price?

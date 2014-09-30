@@ -19,9 +19,10 @@ db = postgres.define "refuelings", {
 }
 
 RefuelingStore = () ->
-  find: (query = {}) ->
-    db.find(where: query).then (refulings) ->
-      refulings.values
+  findAll: (query = {}) ->
+    db.findAll(where: query).then (refulings) ->
+      refulings.map (refuling) ->
+        refuling.values
 
   create: (params) ->
     db.create(params).then (refuling) ->

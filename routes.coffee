@@ -9,4 +9,6 @@ module.exports = (app) ->
   app.get '/v1/gas_stations', GasStationsController.findByLatAndLon
   app.get '/v1/refuelings/', RefuelingsController.index
   app.post '/v1/refuelings', RefuelingsController.create
+  app.get '/v1/cars', CarsController.index
   app.post '/v1/cars', CarsController.create
+  app.get '/v1/cars/find_by_mac/:mac', CarsController.findByMac

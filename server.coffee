@@ -3,11 +3,7 @@ bodyParser = require 'body-parser'
 routes = require './routes'
 
 app = express()
-# app.get '/', (req, res) ->
-#   res.send "Car Application"
 
-# app.get '/v1/gas_stations', (req, res) ->
-#   res.send "find gas Stations"
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())

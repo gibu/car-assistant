@@ -10,7 +10,7 @@ RefuelingsController =
       response.status(500).json(err)
     if request.query.mac?
       query.mac = request.query.mac
-    Refueling.find(query).then done, error
+    Refueling.findAll(query).then done, error
 
   create: (request, response) ->
     done = (refueling) ->

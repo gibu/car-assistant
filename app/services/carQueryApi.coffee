@@ -17,7 +17,6 @@ class CarQueryApi
     options =
       url: url
     options = _.merge options, params
-    console.log options
     request options, (err,response, body) ->
       if err
         return cb(err)

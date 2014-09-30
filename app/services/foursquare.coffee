@@ -16,7 +16,6 @@ class Foursquare
 
   req: (path, params ,cb)->
     url = @base + path
-    console.log url
     result = {}
     options =
       url: url
