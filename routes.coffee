@@ -6,4 +6,5 @@ module.exports = (app) ->
     # res.send "Car Application22"
 
   app.get '/v1/gas_stations', GasStationsController.findByLatAndLon
+  app.get '/v1/refuelings/', RefuelingsController.index
   app.post '/v1/refuelings', RefuelingsController.create

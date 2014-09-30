@@ -1,12 +1,23 @@
 Refueling = require '../models/Refueling'
 RefuelingsController = {}
 
-RefuelingsController.create = (request, response) ->
-  done = (refueling) ->
-    response.json refueling
-  error = (err) ->
-    response.json(500, err)
+RefuelingsController =
+  index: (request, response) ->
+    query = {}
+    done = (refuelings) ->
+      response.status(200).json(refuelings)
+    error = (err) ->
+      response.status(500).json(err)
+    if request.query.mac?
+      query.mac = request.query.mac
+    Refueling.find(query).then done, error
 
-  Refueling.create(request.body).then done, error
+  create: (request, response) ->
+    done = (refueling) ->
+      response.status(200).json(refueling)
+    error = (err) ->
+      response.status(500).json(err)
+
+    Refueling.create(request.body).then done, error
 
 module.exports = RefuelingsController
