@@ -14,6 +14,7 @@ db = postgres.define "refuelings", {
   item_price: Sequelize.FLOAT
   quantity: Sequelize.FLOAT
   type: Sequelize.STRING
+  date: Sequelize.DATE
 },{
   underscored: true
 }
