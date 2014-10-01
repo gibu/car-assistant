@@ -11,6 +11,24 @@ class CarQueryApi
     path = "?cmd=getTrims&make=#{make}&model=#{model}&year=#{year}"
     @req path, {}, cb
 
+  getMakes: (year, cb) ->
+    path = "?cmd=getMakes"
+    if year
+      path += "&year=#{year}"
+    @req path, {}, cb
+
+  getModels: (make, year, cb) ->
+    path = "?cmd=getModels&make=#{make}"
+    if year
+      path += "&year=#{year}"
+    @req path, {}, cb
+
+  getTrims: (make, model, year, cb) ->
+    path = "?cmd=getTrims&make=#{make}&model=#{model}"
+    if year
+      path += "&year=#{year}"
+    @req path, {}, cb
+
   req: (path, params ,cb)->
     url = @base + path
     result = {}

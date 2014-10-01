@@ -35,4 +35,16 @@ Car =
       carParams.fuel = car.model_engine_fuel
       CarStore.create(carParams)
 
+  getMakes: (year) ->
+    Q.ninvoke(CarQueryApi, 'getMakes', year).then (response) ->
+      response.body.Makes
+
+  getModels: (make, year) ->
+    Q.ninvoke(CarQueryApi, 'getModels', make, year).then (response) ->
+      response.body.Models
+
+  getTrims: (make, model, year) ->
+    Q.ninvoke(CarQueryApi, 'getTrims', make, model, year).then (response) ->
+      response.body.Trims
+
 module.exports = Car

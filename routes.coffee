@@ -13,5 +13,8 @@ module.exports = (app) ->
   app.get '/v1/cars', CarsController.index
   app.post '/v1/cars', CarsController.create
   app.get '/v1/cars/find_by_mac/:mac', CarsController.findByMac
+  app.get '/v1/cars/makes', CarsController.getMakes
+  app.get '/v1/cars/:make/models', CarsController.getModels
+  app.get '/v1/cars/:make/:model/trims', CarsController.getTrims
   app.get '/v1/routes', RoutesController.index
   app.post '/v1/routes', RoutesController.create

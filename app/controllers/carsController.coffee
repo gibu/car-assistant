@@ -27,4 +27,25 @@ CarsController =
       response.status(500).json(err)
     Car.findByMac(request.params.mac).then done, error
 
+  getMakes: (request, response) ->
+    done = (makes) ->
+      response.status(200).json(makes)
+    error = (err) ->
+      response.status(500).json(err)
+    Car.getMakes(request.query.year).then done, error
+
+  getModels: (request, response) ->
+    done = (makes) ->
+      response.status(200).json(makes)
+    error = (err) ->
+      response.status(500).json(err)
+    Car.getModels(request.params.make, request.query.year).then done, error
+
+  getTrims: (request, response) ->
+    done = (trims) ->
+      response.status(200).json(trims)
+    error = (err) ->
+      response.status(500).json(err)
+    Car.getTrims(request.params.make, request.params.model, request.query.year).then done, error
+
 module.exports = CarsController
