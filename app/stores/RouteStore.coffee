@@ -29,4 +29,9 @@ RouteStore =
     db.create(params).then (route) ->
       route.values
 
+  findByMacAndGroupByDate: (mac) ->
+    postgres.query("select date_trunc('day', date) as day, sum(duration) as duration, sum(length) as length from routes where mac=? group by date_trunc('day',date);",null, {raw: true}, [mac])
+      .then (data) ->
+        data
+
 module.exports = RouteStore

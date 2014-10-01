@@ -1,6 +1,7 @@
 Q = require 'q'
 CarStore = require '../stores/CarStore'
 RefuelingStore = require '../stores/RefuelingStore'
+RouteStore = require '../stores/RouteStore'
 CarQueryApi = require '../services/carQueryApi'
 
 Car =
@@ -11,8 +12,11 @@ Car =
     CarStore.find({mac}).then((car) ->
       unless car
         return {}
-      RefuelingStore.findAll(mac: car.mac).then((refuelings) ->
-        car.refuelings = refuelings
+      getRefuelings = RefuelingStore.findAll(mac: car.mac)
+      getRoutes = RouteStore.findAll(mac: car.mac)
+      Q.all([getRefuelings, getRoutes]).then((result) ->
+        car.refulings = result[0]
+        car.routes = result[1]
         car
       )
     )
