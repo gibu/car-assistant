@@ -10,7 +10,7 @@ module.exports = (app) ->
   app.get '/v1/gas_stations', GasStationsController.findByLatAndLon
   app.get '/v1/refuelings/', RefuelingsController.index
   app.post '/v1/refuelings', RefuelingsController.create
-  app.get '/v1/refuelings/:mac/monthly_cost', RefuelingsController.getMonthlyChart
+  app.get '/v1/refuelings/:mac/monthly_chart', RefuelingsController.getMonthlyChart
   app.get '/v1/cars', CarsController.index
   app.post '/v1/cars', CarsController.create
   app.get '/v1/cars/find_by_mac/:mac', CarsController.findByMac
@@ -20,4 +20,4 @@ module.exports = (app) ->
   app.get '/v1/cars/:id', CarsController.get
   app.get '/v1/routes', RoutesController.index
   app.post '/v1/routes', RoutesController.create
-  app.get '/v1/routes/:mac/monthly_stats', RoutesController.getMonthlyStats
+  app.get '/v1/routes/:mac/monthly_chart', RoutesController.getMonthlyChart

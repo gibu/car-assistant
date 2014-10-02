@@ -25,6 +25,6 @@ RefuelingsController =
       response.status(200).json(refueling)
     error = (err) ->
       response.status(500).json(err)
-    Refueling.getMonthlyCost(request.params.mac).then done, error
+    Refueling.getMonthlyCost(request.params.mac, request.query.width, request.query.height).then done, error
 
 module.exports = RefuelingsController

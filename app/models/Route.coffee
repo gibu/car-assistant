@@ -20,9 +20,10 @@ Route =
       RouteStore.create params
     )
 
-  getMonthlyCharts: (mac) ->
+  getMonthlyCharts: (mac, width, height) ->
+    width = if width? then width else 600
+    height = if height? then height else 600
     RouteStore.getMonthlyData(mac).then (data) ->
-      console.log data
       x = []
       y = []
       data.forEach (d) ->
@@ -30,7 +31,7 @@ Route =
         y.push d.total_length
       graphData = [{x: x, y: y, type: 'bar', marker: {color: "#e3c94d"}}]
       graphOptions = {fileopt : "extend", filename : "#{mac}_monthly_route"}
-      Q.ninvoke(Plotly, 'plot', graphData, graphOptions, 600, 600).then (url) ->
+      Q.ninvoke(Plotly, 'plot', graphData, graphOptions, width, height).then (url) ->
         {url}
 
 module.exports = Route

@@ -9,7 +9,9 @@ Refueling =
   findAll: (query) ->
     RefuelingStore.findAll(query)
 
-  getMonthlyCost: (mac) ->
+  getMonthlyCost: (mac, width, height) ->
+    width = if width? then width else 600
+    height = if height? then height else 600
     RefuelingStore.getMonthlyCost(mac).then (data) ->
       x = []
       y = []
@@ -17,8 +19,8 @@ Refueling =
         x.push moment(d.month).format('MMM YY')
         y.push d.total_price
       graphData = [{x: x, y: y, type: 'bar', marker: {color: "#e3c94d"}}]
-      graphOptions = {fileopt : "extend", filename : "#{mac}_month_1"}
-      Q.ninvoke(Plotly, 'plot', graphData, graphOptions, 600, 600).then (url) ->
+      graphOptions = {fileopt : "extend", filename : "#{mac}_month_refueling"}
+      Q.ninvoke(Plotly, 'plot', graphData, graphOptions, width, height).then (url) ->
         {url}
 
   create: (params) ->
