@@ -15,6 +15,12 @@ db = postgres.define "refuelings", {
   quantity: Sequelize.FLOAT
   type: Sequelize.STRING
   date: Sequelize.DATE
+  car_id:
+    type: Sequelize.INTEGER,
+    references: "cars",
+    referenceKey: "id",
+    onUpdate: "CASCADE",
+    onDelete: "RESTRICT"
 },{
   underscored: true
 }

@@ -21,14 +21,27 @@ Car =
       )
     )
 
+  getModelFromCarQueryApi: (modelId) ->
+    Q.ninvoke(CarQueryApi, 'getModel', modelId).then (response) ->
+      response.body
+
   fetchInformation: (make, model, year) ->
     Q.ninvoke(CarQueryApi, 'find', make, model, year).then (response) ->
       response.body.Trims
 
   fetchInformationAndcreate: (params) ->
-    @fetchInformation(params.make, params.model, params.year).then (cars) =>
+    getCarInformation = null
+    if params.model_id
+      getCarInformation = @getModelFromCarQueryApi(params.model_id)
+    else
+      getCarInformation = @fetchInformation(params.make, params.model, params.year)
+
+    getCarInformation.then (cars) =>
       car = cars[0]
-      carParams = params
+      carParams = {}
+      carParams.make = car.model_make_id
+      carParams.model = car.model_name
+      carParams.year = car.model_year
       carParams.engine = car.model_trim
       carParams.fuel_consumption = car.model_lkm_mixed
       carParams.fuel_capacity = car.model_fuel_cap_l

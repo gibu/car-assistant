@@ -11,6 +11,12 @@ db = postgres.define "routes", {
   duration: Sequelize.FLOAT
   length: Sequelize.FLOAT
   date: Sequelize.DATE
+  car_id:
+    type: Sequelize.INTEGER,
+    references: "cars",
+    referenceKey: "id",
+    onUpdate: "CASCADE",
+    onDelete: "RESTRICT"
 },{
   underscored: true
 }
