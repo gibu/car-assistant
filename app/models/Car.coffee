@@ -8,8 +8,14 @@ Car =
   findAll: (query) ->
     CarStore.findAll(query)
 
+  findById: (id) ->
+    @find({id})
+
   findByMac: (mac) ->
-    CarStore.find({mac}).then((car) ->
+    @find({mac})
+
+  find: (query) ->
+    CarStore.find(query).then((car) ->
       unless car
         return {}
       getRefuelings = RefuelingStore.findAll(mac: car.mac)
