@@ -20,4 +20,11 @@ RoutesController =
 
     Route.create(request.body).then done, error
 
+  getMonthlyStats: (request, response) ->
+    done = (route) ->
+      response.status(200).json(route)
+    error = (err) ->
+      response.status(500).json(err)
+    Route.getMonthlyCharts(request.params.mac).then done, error
+
 module.exports = RoutesController

@@ -20,4 +20,11 @@ RefuelingsController =
 
     Refueling.create(request.body).then done, error
 
+  getMonthlyChart: (request, response) ->
+    done = (refueling) ->
+      response.status(200).json(refueling)
+    error = (err) ->
+      response.status(500).json(err)
+    Refueling.getMonthlyCost(request.params.mac).then done, error
+
 module.exports = RefuelingsController

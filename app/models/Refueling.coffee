@@ -1,10 +1,25 @@
 _ = require 'lodash'
+Q = require 'q'
 RefuelingStore = require '../stores/RefuelingStore'
 CarStore = require '../stores/CarStore'
+Plotly = require '../services/plotly'
+moment = require 'moment'
 
 Refueling =
   findAll: (query) ->
     RefuelingStore.findAll(query)
+
+  getMonthlyCost: (mac) ->
+    RefuelingStore.getMonthlyCost(mac).then (data) ->
+      x = []
+      y = []
+      data.forEach (d) ->
+        x.push moment(d.month).format('MMM YY')
+        y.push d.total_price
+      graphData = [{x: x, y: y, type: 'bar', marker: {color: "#e3c94d"}}]
+      graphOptions = {fileopt : "extend", filename : "#{mac}_month_1"}
+      Q.ninvoke(Plotly, 'plot', graphData, graphOptions, 600, 600).then (url) ->
+        {url}
 
   create: (params) ->
     query = {}
