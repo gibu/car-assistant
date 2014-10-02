@@ -27,4 +27,11 @@ RoutesController =
       response.status(500).json(err)
     Route.getMonthlyCharts(request.params.mac, request.query.width, request.query.height).then done, error
 
+  getMonthlyChartAverageSpeed: (request, response) ->
+    done = (route) ->
+      response.status(200).json(route)
+    error = (err) ->
+      response.status(500).json(err)
+    Route.getMonthlyChartAverageSpeed(request.params.mac, request.query.width, request.query.height).then done, error
+
 module.exports = RoutesController

@@ -23,6 +23,7 @@ db = postgres.define "cars", {
 
 CarStore =
   find: (query = {}) ->
+    console.log query
     db.find(where: query).then (car) ->
       car.values
 

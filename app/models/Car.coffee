@@ -45,6 +45,7 @@ Car =
     getCarInformation.then (cars) =>
       car = cars[0]
       carParams = {}
+      carParams.mac = params.mac
       carParams.make = car.model_make_id
       carParams.model = car.model_name
       carParams.year = car.model_year

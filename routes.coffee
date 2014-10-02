@@ -21,3 +21,4 @@ module.exports = (app) ->
   app.get '/v1/routes', RoutesController.index
   app.post '/v1/routes', RoutesController.create
   app.get '/v1/routes/:mac/monthly_chart', RoutesController.getMonthlyChart
+  app.get '/v1/routes/:mac/monthly_chart_average_speed', RoutesController.getMonthlyChartAverageSpeed

@@ -41,6 +41,6 @@ RouteStore =
         data
 
   getMonthlyData: (mac) ->
-    postgres.query("select date_trunc('month', date) as month, sum(duration) as total_duration, sum(length) as total_length from routes where mac=? group by month;", null, {raw: true}, [mac])
+    postgres.query("select date_trunc('month', date) as month, sum(duration) as total_duration, sum(length) as total_length from routes where mac=? group by month order by month asc;", null, {raw: true}, [mac])
 
 module.exports = RouteStore
