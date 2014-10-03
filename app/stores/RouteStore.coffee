@@ -24,7 +24,7 @@ db = postgres.define "routes", {
 RouteStore =
   find: (query = {}) ->
     db.find(where: query).then (route) ->
-      route.values
+      route?.values
 
   findAll: (query = {}) ->
     db.findAll(where: query).then (routes) ->

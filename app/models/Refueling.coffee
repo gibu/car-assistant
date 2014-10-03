@@ -1,7 +1,9 @@
 _ = require 'lodash'
 Q = require 'q'
 RefuelingStore = require '../stores/RefuelingStore'
+# CarQueryApi = require '../services/carQueryApi'
 CarStore = require '../stores/CarStore'
+Car = require './Car'
 Plotly = require '../services/plotly'
 moment = require 'moment'
 
@@ -35,8 +37,21 @@ Refueling =
       params.quantity = params.total_price / params.item_price
     params.date = if params.date then new Date(params.date * 1000) else new Date()
     CarStore.find(query).then((car) ->
-      params.car_id = car.id
-      RefuelingStore.create params
+      if car
+        params.car_id = car.id
+        return RefuelingStore.create params
+      else
+        carParams =
+          mac: params.mac
+          model: params.model
+          make: params.make
+          year: params.year
+        return Car.fetchInformationAndcreate(carParams).then((car) ->
+          params.car_id = car.id
+          return RefuelingStore.create params
+        )
     )
 
+
+# {"mac": "test", "make": "citroen", "model": "c4", "year": 2005}
 module.exports = Refueling

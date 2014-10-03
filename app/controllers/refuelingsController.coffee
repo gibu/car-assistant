@@ -16,6 +16,7 @@ RefuelingsController =
     done = (refueling) ->
       response.status(200).json(refueling)
     error = (err) ->
+      console.log err
       response.status(500).json(err)
 
     Refueling.create(request.body).then done, error

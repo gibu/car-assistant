@@ -23,9 +23,8 @@ db = postgres.define "cars", {
 
 CarStore =
   find: (query = {}) ->
-    console.log query
     db.find(where: query).then (car) ->
-      car.values
+      car?.values
 
   findAll: (query = {}) ->
     db.findAll(where: query).then (cars) ->
@@ -34,6 +33,6 @@ CarStore =
 
   create: (params) ->
     db.create(params).then (car) ->
-      car.values
+      car?.values
 
 module.exports = CarStore

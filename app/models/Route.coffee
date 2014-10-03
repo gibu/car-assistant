@@ -3,6 +3,8 @@ Q = require 'q'
 RouteStore = require '../stores/RouteStore'
 CarStore = require '../stores/CarStore'
 Plotly = require '../services/plotly'
+Car = require './Car'
+
 
 Route =
   findAll: (query) ->
@@ -16,8 +18,19 @@ Route =
       query = {car_id: params.car_id}
     params.date = if params.date then new Date(params.date * 1000) else new Date()
     CarStore.find(query).then((car) ->
-      params.car_id = car.id
-      RouteStore.create params
+      if car
+        params.car_id = car.id
+        return RouteStore.create params
+      else
+        carParams =
+          mac: params.mac
+          model: params.model
+          make: params.make
+          year: params.year
+        return Car.fetchInformationAndcreate(carParams).then((car) ->
+          params.car_id = car.id
+          return RouteStore.create params
+        )
     )
 
   getMonthlyCharts: (mac, width, height) ->

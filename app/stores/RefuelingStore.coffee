@@ -33,7 +33,7 @@ RefuelingStore = () ->
 
   create: (params) ->
     db.create(params).then (refuling) ->
-      refuling.values
+      refuling?.values
 
   getMonthlyCost: (mac) ->
     postgres.query("select date_trunc('month', date) as month, sum(total_price) as total_price from refuelings where mac=? group by month order by month asc;", null, {raw:true}, [mac]).then (data) ->
